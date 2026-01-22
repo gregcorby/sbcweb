@@ -13,13 +13,17 @@ export default function Home() {
       if (rafRef.current) return;
 
       rafRef.current = requestAnimationFrame(() => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 2;
-        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+        // Cursor position as 0-1 (left edge = 0, right edge = 1)
+        const xPercent = e.clientX / window.innerWidth;
+        const yPercent = e.clientY / window.innerHeight;
 
-        const maxOffset = 15;
+        // Max movement in pixels
+        const maxOffset = 20;
+
+        // Map: 0% = +maxOffset, 100% = -maxOffset
         setImageOffset({
-          x: -x * maxOffset,
-          y: -y * maxOffset
+          x: (0.5 - xPercent) * maxOffset * 2,
+          y: (0.5 - yPercent) * maxOffset * 2
         });
 
         rafRef.current = null;
