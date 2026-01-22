@@ -1,17 +1,44 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function Home() {
+  const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 });
+  const rafRef = useRef<number | null>(null);
+
   useEffect(() => {
-    // Generate rain
+    const handleMouseMove = (e: MouseEvent) => {
+      if (rafRef.current) return;
+
+      rafRef.current = requestAnimationFrame(() => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2;
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        const maxOffset = 15;
+        setImageOffset({
+          x: -x * maxOffset,
+          y: -y * maxOffset
+        });
+
+        rafRef.current = null;
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
     const rainContainer = document.getElementById('rain');
     if (!rainContainer) return;
-    
+
     const rainCount = 50;
-    
+
     for (let i = 0; i < rainCount; i++) {
       const rain = document.createElement('div');
       rain.className = styles.rain;
@@ -41,6 +68,9 @@ export default function Home() {
           height={1200}
           priority
           className={styles.sumiImage}
+          style={{
+            transform: `translate(${imageOffset.x}px, ${imageOffset.y}px) scale(1.1)`
+          }}
         />
       </div>
 

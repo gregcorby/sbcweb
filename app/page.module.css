@@ -12,6 +12,7 @@
   left: 0;
   top: 0;
   background-color: var(--bg-dark);
+  overflow: hidden;
 }
 
 .sumiImage {
@@ -19,6 +20,8 @@
   height: 100vh;
   object-fit: cover;
   object-position: top center;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
 }
 
 /* Right column - Content */
