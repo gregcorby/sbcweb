@@ -147,6 +147,14 @@ export default function Home() {
 
           <footer className={`${styles.footer} ${styles.fadeInUp} ${styles.delay6}`}>
             <span>observational</span> · not authoritative · designed for early review
+            <a
+              href="https://pump.fun/coin/3C3pTGEFyhCH8eQ6AdqLos1A9rYikoyhmcJZFuz4pump"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contractAddress}
+            >
+              CA: 3C3pTGEFyhCH8eQ6AdqLos1A9rYikoyhmcJZFuz4pump
+            </a>
           </footer>
         </div>
       </div>

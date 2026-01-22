@@ -272,11 +272,24 @@
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-dim);
-  text-align: center;
+  text-align: left;
 }
 
 .footer span {
   color: var(--purple-dim);
+}
+
+.contractAddress {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  word-break: break-all;
+  transition: color 0.2s ease;
+}
+
+.contractAddress:hover {
+  color: var(--purple-soft);
 }
 
 /* Decorative elements */
@@ -321,7 +334,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
